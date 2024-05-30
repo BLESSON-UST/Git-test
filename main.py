@@ -84,13 +84,3 @@ def handle_user_questions(question_context, conversation_history):
 if __name__ == '__main__':
     main()
 ```
-
-Changes Made:
-
-1. Modularized the code by creating separate functions `get_github_url` and `get_repo_name`.
-2. Added try-except block in the `main` function to handle exceptions and provide error messages.
-   - If an exception occurs, it prints a meaningful error message and exits the function.
-3. No security enhancements made as the code doesn't involve any input validation or sanitization.
-4. No optimization of code complexity performed as the code is already fairly simple.
-5. No technical debt found in the original code.
-6. No performance or readability enhancements made as the original code adheres to good coding practices and uses meaningful variable and function names.
