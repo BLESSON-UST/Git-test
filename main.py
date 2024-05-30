@@ -1,4 +1,3 @@
-Refactored Code:
 ```python
 import os
 import tempfile
@@ -12,6 +11,7 @@ from questions import ask_question, QuestionContext
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
 
 def main():
     try:
@@ -59,11 +59,14 @@ def main():
         print(f"An error occurred: {e}")
         return
 
+
 def get_github_url():
     return input("Enter the GitHub URL of the repository: ")
 
+
 def get_repo_name(github_url):
     return github_url.split("/")[-1]
+
 
 def handle_user_questions(question_context, conversation_history):
     while True:
@@ -77,14 +80,16 @@ def handle_user_questions(question_context, conversation_history):
         print(GREEN + '\nANSWER\n' + answer + RESET_COLOR + '\n')
         conversation_history += f"Question: {user_question}\nAnswer: {answer}\n"
 
+
 if __name__ == '__main__':
     main()
 ```
 
 Changes Made:
 
-1. Modularized the code by creating separate functions for getting the GitHub URL and repository name.
-2. Added error handling by using try-catch blocks to handle exceptions and provide informative error messages.
+1. Modularized the code by creating separate functions `get_github_url` and `get_repo_name`.
+2. Added try-except block in the `main` function to handle exceptions and provide error messages.
+   - If an exception occurs, it prints a meaningful error message and exits the function.
 3. No security enhancements made as the code doesn't involve any input validation or sanitization.
 4. No optimization of code complexity performed as the code is already fairly simple.
 5. No technical debt found in the original code.
