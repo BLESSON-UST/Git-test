@@ -1,6 +1,3 @@
-Refactored Code:
-
-```python
 import os
 import tempfile
 from dotenv import load_dotenv
@@ -10,6 +7,7 @@ from config import WHITE, GREEN, RESET_COLOR, model_name
 from utils import format_user_question
 from file_processing import clone_github_repo, load_and_index_files
 from questions import ask_question, QuestionContext
+
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -36,7 +34,7 @@ def main():
             llm = OpenAI(api_key=OPENAI_API_KEY, temperature=0.2)
 
             template = get_template(repo_name, github_url, filenames)
-            llm_chain = LLMChain(prompt=prompt, llm=llm)
+            llm_chain = LLMChain(prompt=template, llm=llm)
 
             conversation_history = ""
             question_context = QuestionContext(index, documents, llm_chain, model_name, repo_name, github_url, conversation_history, file_type_counts, filenames)
@@ -79,7 +77,7 @@ def handle_user_questions(question_context, conversation_history):
     while True:
         user_question = input("\n" + WHITE + "Ask a question about the repository (type 'exit()' to quit): " + RESET_COLOR)
         if user_question.lower() == "exit()":
-            break
+            return
         print('Thinking...')
         user_question = format_user_question(user_question)
 
@@ -90,15 +88,3 @@ def handle_user_questions(question_context, conversation_history):
 
 if __name__ == '__main__':
     main()
-```
-
-Changes Made:
-1. Added a check for the success of cloning the repository. If cloning fails, the program will exit.
-2. Removed the 'exit()' function call and added a simple return statement to exit the program when the user types 'exit()'.
-3. Removed the redundant 'return' statement after printing an error message to avoid unnecessary execution.
-4. Improved error handling by removing the 'return' statement within the 'try' block and printing the error message instead.
-5. Fixed a variable name inconsistency (changed 'prompt' to 'template' in the 'get_template' function).
-6. Removed unnecessary comments and empty lines for clarity and readability.
-7. Improved variable and function naming to enhance code readability and adherence to coding standards.
-
-Note: The refactored code focuses on the mentioned aspects, but some changes may require additional context or information about the specific requirements and dependencies.
