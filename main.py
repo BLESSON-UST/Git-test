@@ -1,3 +1,7 @@
+Refactored Code:
+
+```python
+
 import os
 import tempfile
 from dotenv import load_dotenv
@@ -88,3 +92,5 @@ def handle_user_questions(question_context, conversation_history):
 
 if __name__ == '__main__':
     main()
+
+```
