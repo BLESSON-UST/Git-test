@@ -11,10 +11,8 @@ from utils import format_user_question
 from file_processing import clone_github_repo, load_and_index_files
 from questions import ask_question, QuestionContext
 
-
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
 
 def main():
     try:
@@ -46,14 +44,11 @@ def main():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-
 def get_github_url() -> str:
     return input("Enter the GitHub URL of the repository: ")
 
-
 def get_repo_name(github_url: str) -> str:
     return github_url.split("/")[-1]
-
 
 def get_template(repo_name: str, github_url: str, filenames: list) -> PromptTemplate:
     template = """
@@ -75,7 +70,6 @@ def get_template(repo_name: str, github_url: str, filenames: list) -> PromptTemp
         input_variables=["repo_name", "github_url", "conversation_history", "question", "numbered_documents", "file_type_counts", "filenames"]
     )
 
-
 def handle_user_questions(question_context: QuestionContext, conversation_history: str):
     while True:
         user_question = input("\n" + WHITE + "Ask a question about the repository (type 'exit()' to quit): " + RESET_COLOR)
@@ -87,7 +81,6 @@ def handle_user_questions(question_context: QuestionContext, conversation_histor
         answer = ask_question(user_question, question_context)
         print(GREEN + '\nANSWER\n' + answer + RESET_COLOR + '\n')
         conversation_history += f"Question: {user_question}\nAnswer: {answer}\n"
-
 
 if __name__ == '__main__':
     main()
