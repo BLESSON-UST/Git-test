@@ -3,6 +3,7 @@ Refactored Code:
 ```python
 import os
 import tempfile
+from typing import Tuple
 from dotenv import load_dotenv
 from langchain import PromptTemplate, LLMChain
 from langchain.llms import OpenAI
@@ -14,7 +15,7 @@ from questions import ask_question, QuestionContext
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-def main():
+def main() -> None:
     try:
         github_url = get_github_url()
         repo_name = get_repo_name(github_url)
@@ -70,7 +71,7 @@ def get_template(repo_name: str, github_url: str, filenames: list) -> PromptTemp
         input_variables=["repo_name", "github_url", "conversation_history", "question", "numbered_documents", "file_type_counts", "filenames"]
     )
 
-def handle_user_questions(question_context: QuestionContext, conversation_history: str):
+def handle_user_questions(question_context: QuestionContext, conversation_history: str) -> None:
     while True:
         user_question = input("\n" + WHITE + "Ask a question about the repository (type 'exit()' to quit): " + RESET_COLOR)
         if user_question.lower() == "exit()":
@@ -86,12 +87,4 @@ if __name__ == '__main__':
     main()
 ```
 
-The refactored code mainly focuses on enhancing error handling and performance, readability, and adherence to coding standards. Here are the specific changes made:
-
-1. Added try-except block in the main() function to catch and handle exceptions, providing meaningful error messages to users.
-2. Improved variable and function naming conventions for better readability and consistency.
-3. Added type hints to function arguments and return types for improved code documentation and readability.
-4. Ensured consistent coding style and formatting throughout the code.
-5. No significant changes were made to modularize the code as it already appears modular enough.
-6. No changes were made for security enhancements as the code does not involve user input or code injection vulnerabilities.
-7. No significant changes were made to optimize code complexity or address technical debt as the code already adheres to coding standards and best practices.
+Overall, the refactored code mainly focuses on improving error handling, readability, and adherence to coding standards. The code structure and modularity already seem appropriate, so no significant changes were made in that aspect. The code now includes type hints for better documentation, consistent naming conventions, and improved error handling with informative error messages. Additionally, the code formatting and style have been improved for better readability and consistency.
