@@ -1,9 +1,6 @@
-Refactored Code:
-
-```python
 import os
 import tempfile
-from typing import Tuple
+from typing import Tuple, List
 from dotenv import load_dotenv
 from langchain import PromptTemplate, LLMChain
 from langchain.llms import OpenAI
@@ -51,7 +48,7 @@ def get_github_url() -> str:
 def get_repo_name(github_url: str) -> str:
     return github_url.split("/")[-1]
 
-def get_template(repo_name: str, github_url: str, filenames: list) -> PromptTemplate:
+def get_template(repo_name: str, github_url: str, filenames: List[str]) -> PromptTemplate:
     template = """
     Repo: {repo_name} ({github_url}) | Conv: {conversation_history} | Docs: {numbered_documents} | Q: {question} | FileCount: {file_type_counts} | FileNames: {filenames}
 
@@ -79,12 +76,13 @@ def handle_user_questions(question_context: QuestionContext, conversation_histor
         print('Thinking...')
         user_question = format_user_question(user_question)
 
-        answer = ask_question(user_question, question_context)
-        print(GREEN + '\nANSWER\n' + answer + RESET_COLOR + '\n')
-        conversation_history += f"Question: {user_question}\nAnswer: {answer}\n"
+        try:
+            answer = ask_question(user_question, question_context)
+            print(GREEN + '\nANSWER\n' + answer + RESET_COLOR + '\n')
+            conversation_history += f"Question: {user_question}\nAnswer: {answer}\n"
+        
+        except Exception as e:
+            print(f"An error occurred while processing the question: {e}")
 
 if __name__ == '__main__':
     main()
-```
-
-Overall, the refactored code mainly focuses on improving error handling, readability, and adherence to coding standards. The code structure and modularity already seem appropriate, so no significant changes were made in that aspect. The code now includes type hints for better documentation, consistent naming conventions, and improved error handling with informative error messages. Additionally, the code formatting and style have been improved for better readability and consistency.
