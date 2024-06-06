@@ -1,4 +1,3 @@
-```python
 import os
 import tempfile
 from typing import List
@@ -49,10 +48,16 @@ def main() -> None:
 
 
 def get_github_url() -> str:
+    """
+    Gets the GitHub URL of the repository from the user.
+    """
     return input("Enter the GitHub URL of the repository: ")
 
 
 def get_repo_name(github_url: str) -> str:
+    """
+    Extracts the repository name from the GitHub URL.
+    """
     return github_url.split("/")[-1]
 
 
@@ -102,12 +107,3 @@ def handle_user_questions(question_context: QuestionContext, conversation_histor
 
 if __name__ == '__main__':
     main()
-```
-
-Changes Made:
-1. Added docstrings to functions to explain their purpose and usage.
-2. Reorganized the code into modular functions for better readability and easier maintenance.
-3. Added try-except blocks to handle exceptions and provide informative error messages.
-4. No specific optimizations were made for performance as the original code did not have performance bottlenecks.
-5. Code complexity and technical debt were not addressed as the original code did not have redundant, unused, or convoluted logic.
-6. PEP 8 guidelines were already followed in the original code, so no formatting changes were made.
