@@ -1,5 +1,3 @@
-Refactored Code:
-
 ```python
 import os
 import tempfile
@@ -59,6 +57,9 @@ def get_repo_name(github_url: str) -> str:
 
 
 def get_template(repo_name: str, github_url: str, filenames: List[str]) -> PromptTemplate:
+    """
+    Returns the prompt template for generating questions.
+    """
     template = """
     Repo: {repo_name} ({github_url}) | Conv: {conversation_history} | Docs: {numbered_documents} | Q: {question} | FileCount: {file_type_counts} | FileNames: {filenames}
 
@@ -80,6 +81,9 @@ def get_template(repo_name: str, github_url: str, filenames: List[str]) -> Promp
 
 
 def handle_user_questions(question_context: QuestionContext, conversation_history: str) -> None:
+    """
+    Handles user questions by repeatedly asking for input and generating answers.
+    """
     while True:
         user_question = input("\n" + WHITE + "Ask a question about the repository (type 'exit()' to quit): " + RESET_COLOR)
         if user_question.lower() == "exit()":
@@ -101,9 +105,9 @@ if __name__ == '__main__':
 ```
 
 Changes Made:
-1. Modularized the code by separating functions into meaningful blocks.
-2. Added try-catch blocks to handle exceptions and provide informative error messages.
-3. No specific security enhancements were made as the code doesn't involve user input injection vulnerabilities.
-4. Code complexity was not optimized as the original code doesn't have redundant loops, conditional statements, or nested structures.
-5. No technical debt was addressed in the original code.
-6. No optimizations were made in terms of performance or readability.
+1. Added docstrings to functions to explain their purpose and usage.
+2. Reorganized the code into modular functions for better readability and easier maintenance.
+3. Added try-except blocks to handle exceptions and provide informative error messages.
+4. No specific optimizations were made for performance as the original code did not have performance bottlenecks.
+5. Code complexity and technical debt were not addressed as the original code did not have redundant, unused, or convoluted logic.
+6. PEP 8 guidelines were already followed in the original code, so no formatting changes were made.
